@@ -24,15 +24,15 @@ class SimpleBankAccountTest {
 
     @Test
     void testDeposit() {
-        int amount = 100;
+        double amount = 100;
         bankAccount.deposit(accountHolder.id(), amount);
         assertEquals(amount, bankAccount.getBalance());
     }
 
     @Test
     void testWrongDeposit() {
-        int deposit = 100;
-        int wrongDeposit = 50;
+        double deposit = 100;
+        double wrongDeposit = 50;
         int wrongUser = 2;
         bankAccount.deposit(accountHolder.id(), deposit);
         bankAccount.deposit(wrongUser, wrongDeposit);
@@ -41,8 +41,8 @@ class SimpleBankAccountTest {
 
     @Test
     void testWithdraw() {
-        int deposit = 100;
-        int withdrawAmount = 70;
+        double deposit = 100;
+        double withdrawAmount = 70;
         bankAccount.deposit(accountHolder.id(), deposit);
         bankAccount.withdraw(accountHolder.id(), withdrawAmount);
         assertEquals(deposit - withdrawAmount, bankAccount.getBalance());
@@ -50,8 +50,8 @@ class SimpleBankAccountTest {
 
     @Test
     void testWrongIDWithdraw() {
-        int deposit = 100;
-        int withDraw = 70;
+        double deposit = 100;
+        double withDraw = 70;
         int wrongId = 2;
         bankAccount.deposit(accountHolder.id(), deposit);
         bankAccount.withdraw(wrongId, withDraw);
@@ -60,10 +60,12 @@ class SimpleBankAccountTest {
 
     @Test
     void testOverBalanceWithdraw() {
-        int deposit = 50;
-        int withDraw = 70;
+        double deposit = 50;
+        double withDraw = 70;
         bankAccount.deposit(accountHolder.id(), deposit);
         bankAccount.withdraw(accountHolder.id(), withDraw);
         assertEquals(deposit, bankAccount.getBalance());
     }
+
+
 }
