@@ -43,9 +43,10 @@ class SimpleBankAccountTest {
     void testWithdraw() {
         double deposit = 100;
         double withdrawAmount = 70;
+        double fee = 1;
         bankAccount.deposit(accountHolder.id(), deposit);
         bankAccount.withdraw(accountHolder.id(), withdrawAmount);
-        assertEquals(deposit - withdrawAmount, bankAccount.getBalance());
+        assertEquals(deposit - withdrawAmount - fee, bankAccount.getBalance());
     }
 
     @Test
@@ -66,6 +67,5 @@ class SimpleBankAccountTest {
         bankAccount.withdraw(accountHolder.id(), withDraw);
         assertEquals(deposit, bankAccount.getBalance());
     }
-
 
 }
