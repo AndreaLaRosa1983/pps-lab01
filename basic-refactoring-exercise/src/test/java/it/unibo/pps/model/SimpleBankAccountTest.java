@@ -24,28 +24,46 @@ class SimpleBankAccountTest {
 
     @Test
     void testDeposit() {
-        bankAccount.deposit(accountHolder.id(), 100);
-        assertEquals(100, bankAccount.getBalance());
+        int amount = 100;
+        bankAccount.deposit(accountHolder.id(), amount);
+        assertEquals(amount, bankAccount.getBalance());
     }
 
     @Test
     void testWrongDeposit() {
-        bankAccount.deposit(accountHolder.id(), 100);
-        bankAccount.deposit(2, 50);
-        assertEquals(100, bankAccount.getBalance());
+        int deposit = 100;
+        int wrongDeposit = 50;
+        int wrongUser = 2;
+        bankAccount.deposit(accountHolder.id(), deposit);
+        bankAccount.deposit(wrongUser, wrongDeposit);
+        assertEquals(deposit, bankAccount.getBalance());
     }
 
     @Test
     void testWithdraw() {
-        bankAccount.deposit(accountHolder.id(), 100);
-        bankAccount.withdraw(accountHolder.id(), 70);
-        assertEquals(30, bankAccount.getBalance());
+        int deposit = 100;
+        int withdrawAmount = 70;
+        bankAccount.deposit(accountHolder.id(), deposit);
+        bankAccount.withdraw(accountHolder.id(), withdrawAmount);
+        assertEquals(deposit - withdrawAmount, bankAccount.getBalance());
     }
 
     @Test
-    void testWrongWithdraw() {
-        bankAccount.deposit(accountHolder.id(), 100);
-        bankAccount.withdraw(2, 70);
-        assertEquals(100, bankAccount.getBalance());
+    void testWrongIDWithdraw() {
+        int deposit = 100;
+        int withDraw = 70;
+        int wrongId = 2;
+        bankAccount.deposit(accountHolder.id(), deposit);
+        bankAccount.withdraw(wrongId, withDraw);
+        assertEquals(deposit, bankAccount.getBalance());
+    }
+
+    @Test
+    void testOverBalanceWithdraw() {
+        int deposit = 50;
+        int withDraw = 70;
+        bankAccount.deposit(accountHolder.id(), deposit);
+        bankAccount.withdraw(accountHolder.id(), withDraw);
+        assertEquals(deposit, bankAccount.getBalance());
     }
 }
