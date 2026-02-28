@@ -24,6 +24,13 @@ public class SmartDoorLockTest {
     }
 
     @Test
+    void testLockWithoutPin() {
+        assertThrows(IllegalStateException.class, () -> {
+            lock.lock();
+        });
+    }
+
+    @Test
     void isBlocked() {
         int wrongPin = 2345;
         lock.setPin(pin);
