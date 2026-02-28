@@ -1,5 +1,7 @@
 package it.unibo.pps.tdd;
 
+import java.util.Optional;
+
 /**
  *  Task 3 - TDD for Circular Queue
  *  A simple CircularQueue that stores integers with a **fixed** capacity.
@@ -13,4 +15,6 @@ package it.unibo.pps.tdd;
  *   - Introduce methods in the interface in order to make the tests pass.
  *   - Refactor
  */
-public interface CircularQueue { }
+public interface CircularQueue {
+    
+}

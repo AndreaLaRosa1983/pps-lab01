@@ -8,9 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * The test suite for testing the CircularList implementation
  */
-public class CircularListTest {
+class CircularQueueTest {
     @Test
-    public void todo() {
-        assertTrue(true);
+    void testNewQueueIsEmpty() {
+        CircularQueue queue = newCircularQueueImpl(5);
+        assertTrue(queue.isEmpty());
     }
 }
