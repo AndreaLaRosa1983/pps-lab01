@@ -26,4 +26,6 @@ public interface CircularQueue {
     Optional<Integer> dequeue();
 
     boolean isEmpty();
+
+    Optional<Integer> peek();
 }

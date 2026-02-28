@@ -47,4 +47,12 @@ public class CircularQueueImpl implements CircularQueue {
     public boolean isEmpty() {
         return size() == 0 ;
     }
+
+    @Override
+    public Optional<Integer> peek() {
+        if (isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(queue[readIndex]);
+    }
 }

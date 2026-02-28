@@ -3,6 +3,8 @@ package it.unibo.pps.tdd;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -35,7 +37,14 @@ class CircularListTest {
     }
 
     @Test
-    void testEnqueue
-
+    void testPeekReturnsFirstElement() {
+        int value = 42;
+        CircularQueue queue = new CircularQueueImpl(5);
+        queue.enqueue(value);
+        // Verifichiamo che il valore inserito sia quello in "testa"
+        assertEquals(Optional.of(value), queue.peek());
+        // Verifichiamo che peek non abbia rimosso l'elemento
+        assertEquals(1, queue.size());
+    }
 
 }
