@@ -41,4 +41,14 @@ class MinMaxStackImplTest {
         assertEquals(10, stack.getMax());
     }
 
+    @Test
+    void popRemovesAndReturnsLastElement() {
+        stack.push(5);
+
+        int value = stack.pop();
+
+        assertEquals(5, value);
+        assertTrue(stack.isEmpty());
+    }
+
 }
