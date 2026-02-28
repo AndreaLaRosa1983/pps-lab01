@@ -53,6 +53,8 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void reset() {
-
+        this.pin = null;
+        this.lock = false;
+        this.attempts = 0;
     }
 }
