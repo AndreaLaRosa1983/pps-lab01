@@ -48,7 +48,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public int getFailedAttempts() {
-        return 0;
+        return this.attempts;
     }
 
     @Override
