@@ -1,6 +1,9 @@
 package it.unibo.pps.tdd;
 
 public class SmartDoorLockImpl implements SmartDoorLock {
+
+    private boolean lock;
+
     @Override
     public void setPin(int pin) {
 
@@ -18,7 +21,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public boolean isLocked() {
-        return false;
+        return this.lock;
     }
 
     @Override
