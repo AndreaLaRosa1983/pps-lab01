@@ -1,14 +1,12 @@
 package it.unibo.pps.tdd;
 
-import java.util.Objects;
-import java.util.OptionalInt;
-
 public class SmartDoorLockImpl implements SmartDoorLock {
 
     private Integer pin;
-    private boolean lock;
+    private boolean locked;
     private final int maxAttempts = 3;
-    private int attempts = 0;
+    private int attempts;
+
     @Override
     public void setPin(int pin) {
         if (isLocked() || isBlocked()) {
@@ -19,11 +17,13 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void unlock(int pin) {
-        if (this.pin == null || isBlocked()) return;
+        if (this.pin == null || isBlocked()) {
+            return;
+        }
         if (this.pin == pin) {
-            lock = false;
+            locked = false;
         } else {
-            attempts +=1;
+            attempts++;
         }
     }
 
@@ -32,12 +32,12 @@ public class SmartDoorLockImpl implements SmartDoorLock {
         if (pin == null) {
             throw new IllegalStateException("Cannot lock: PIN not set.");
         }
-        this.lock = true;
+        locked = true;
     }
 
     @Override
     public boolean isLocked() {
-        return this.lock;
+        return locked;
     }
 
     @Override
@@ -47,18 +47,18 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public int getMaxAttempts() {
-        return this.maxAttempts;
+        return maxAttempts;
     }
 
     @Override
     public int getFailedAttempts() {
-        return this.attempts;
+        return attempts;
     }
 
     @Override
     public void reset() {
-        this.pin = null;
-        this.lock = false;
-        this.attempts = 0;
+        pin = null;
+        locked = false;
+        attempts = 0;
     }
 }
