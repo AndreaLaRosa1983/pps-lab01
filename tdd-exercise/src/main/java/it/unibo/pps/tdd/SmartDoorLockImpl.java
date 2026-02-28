@@ -11,7 +11,9 @@ public class SmartDoorLockImpl implements SmartDoorLock {
     private int attempts = 0;
     @Override
     public void setPin(int pin) {
-        if (pin < 0 || pin > 9999) return;
+        if (isLocked() || isBlocked()) {
+            throw new IllegalStateException("Cannot set PIN when locked or blocked.");
+        }
         this.pin = pin;
     }
 
