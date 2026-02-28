@@ -38,12 +38,12 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public boolean isBlocked() {
-        return maxAttempts == attempts;
+        return attempts >= maxAttempts;
     }
 
     @Override
     public int getMaxAttempts() {
-        return 0;
+        return this.maxAttempts;
     }
 
     @Override
@@ -53,5 +53,6 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void reset() {
+
     }
 }

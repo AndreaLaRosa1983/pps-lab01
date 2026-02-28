@@ -34,7 +34,7 @@ public class SmartDoorLockTest {
     }
 
     @Test
-    void getExpectedAttempts(){
+    void testGetExpectedAttempts(){
         int wrongPin = 2345 ;
         int attempts = 2;
         lock.setPin(pin);
@@ -44,8 +44,26 @@ public class SmartDoorLockTest {
     }
 
     @Test
-    void getMaxAttempts(){
+    void testGetMaxAttempts(){
         int attempts = 3;
         assertEquals(attempts,lock.getMaxAttempts());
     }
+    @Test
+    void testReset() {
+        int wrongPin = 2345;
+        lock.setPin(pin);
+
+        lock.unlock(wrongPin);
+        lock.unlock(wrongPin);
+        lock.unlock(wrongPin);
+
+        assertTrue(lock.isBlocked());
+        assertEquals(3, lock.getFailedAttempts());
+
+        lock.reset();
+
+        assertFalse(lock.isBlocked());
+        assertEquals(0, lock.getFailedAttempts());
+    }
+
 }
