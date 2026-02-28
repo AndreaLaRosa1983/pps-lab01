@@ -16,6 +16,8 @@ public class SmartDoorLockTest {
        pin = 1234;
     }
 
+
+
     @Test
     public void isLocked() {
         lock.setPin(pin);
@@ -41,6 +43,18 @@ public class SmartDoorLockTest {
 
         lock.unlock(pin);
         assertFalse(lock.isLocked());
+    }
+
+    @Test
+    void testSetPinNotAllowedWhenBlocked() {
+        int wrongPin = 2;
+        lock.setPin(pin);
+
+        lock.unlock(wrongPin);
+        lock.unlock(wrongPin);
+        lock.unlock(wrongPin);
+
+        assertThrows(IllegalStateException.class, () -> lock.setPin(9999));
     }
 
     @Test
