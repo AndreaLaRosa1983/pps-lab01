@@ -26,4 +26,11 @@ class MinMaxStackImplTest {
         assertFalse(stack.isEmpty());
         assertEquals(1, stack.size());
     }
+
+    @Test
+    void peekReturnsLastPushedElement() {
+        stack.push(10);
+        stack.push(20);
+        assertEquals(20, stack.peek());
+    }
 }
