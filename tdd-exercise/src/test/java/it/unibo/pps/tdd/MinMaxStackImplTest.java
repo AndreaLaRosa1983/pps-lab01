@@ -33,4 +33,12 @@ class MinMaxStackImplTest {
         stack.push(20);
         assertEquals(20, stack.peek());
     }
+
+    @Test
+    void getMinAndMaxWithOneElement() {
+        stack.push(10);
+        assertEquals(10, stack.getMin());
+        assertEquals(10, stack.getMax());
+    }
+
 }
