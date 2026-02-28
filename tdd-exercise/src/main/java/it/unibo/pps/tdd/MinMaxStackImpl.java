@@ -22,9 +22,11 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int peek() {
-        return 0;
+        if (stack.isEmpty()) {
+            throw new IllegalStateException("Lo stack è vuoto");
+        }
+        return stack.peek();
     }
-
     @Override
     public int getMin() {
         return 0;
