@@ -40,7 +40,14 @@ public class CircularQueueImpl implements CircularQueue {
 
     @Override
     public Optional<Integer> dequeue() {
-        return Optional.empty();
+        if (isEmpty()) {
+            return Optional.empty();
+        }
+        int value = queue[readIndex];
+        readIndex = (readIndex + 1) % capacity;
+        size--;
+
+        return Optional.of(value);
     }
 
     @Override

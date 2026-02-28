@@ -61,4 +61,26 @@ class CircularListTest {
         assertEquals(Optional.of(value2), queue.peek());
     }
 
+    @Test
+    void testEnqueueOnFullQueueOverwritesOldest() {
+
+        CircularQueue queue = new CircularQueueImpl(3);
+
+        queue.enqueue(10); // Position 0
+        queue.enqueue(20); // Position 1
+        queue.enqueue(30); // Position 2 -> Full queue
+
+        queue.enqueue(40); // rewrite over 10
+
+        assertEquals(3, queue.size());
+
+        assertEquals(Optional.of(20), queue.peek());
+
+        assertEquals(Optional.of(20), queue.dequeue());
+        assertEquals(Optional.of(30), queue.dequeue());
+        assertEquals(Optional.of(40), queue.dequeue());
+
+        assertTrue(queue.isEmpty());
+    }
+
 }
