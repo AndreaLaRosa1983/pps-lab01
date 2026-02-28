@@ -5,14 +5,23 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class MinMaxStackImpl implements MinMaxStack {
+    private record Node(int value, int min, int max) {}
 
-
-    private final Deque<Integer> stack = new ArrayDeque<>();
-
+    private final Deque<Integer> mainStack = new ArrayDeque<>();
+    private final Deque<Integer> maxStack = new ArrayDeque<>();
+    private final Deque<Integer> minStack = new ArrayDeque<>();
 
     @Override
     public void push(int value) {
-        stack.addFirst(value);
+        mainStack.addFirst(value);
+
+        if(mainStack.isEmpty()){
+            maxStack.addFirst(value);
+            minStack.addFirst(value);
+        } else {
+            maxStack.addFirst(Math.max(value,maxStack.peek()));
+            minStack.addFirst(Math.min(value,mainStack.peek()));
+        }
     }
 
     @Override
@@ -22,28 +31,29 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int peek() {
-        if (stack.isEmpty()) {
+        if (mainStack.isEmpty()) {
             throw new IllegalStateException("Lo stack è vuoto");
         }
-        return stack.peek();
+        return mainStack.peek();
     }
     @Override
     public int getMin() {
-        return 0;
+        if (isEmpty()) throw new IllegalStateException();
+        return minStack.peek();
     }
 
     @Override
     public int getMax() {
-        return 0;
+        return maxStack.peek();
     }
 
     @Override
     public boolean isEmpty() {
-        return stack.isEmpty();
+        return mainStack.isEmpty();
     }
 
     @Override
     public int size() {
-        return stack.size();
+        return mainStack.size();
     }
 }
