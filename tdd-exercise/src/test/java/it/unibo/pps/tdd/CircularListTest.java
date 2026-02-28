@@ -72,9 +72,9 @@ class CircularListTest {
 
         queue.enqueue(40); // rewrite over 10
 
-        assertEquals(3, queue.size());
+        assertEquals(3, queue.size()); // retesting size
 
-        assertEquals(Optional.of(20), queue.peek());
+        assertEquals(Optional.of(20), queue.peek()); // peek test
 
         assertEquals(Optional.of(20), queue.dequeue());
         assertEquals(Optional.of(30), queue.dequeue());
