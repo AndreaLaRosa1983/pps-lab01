@@ -7,7 +7,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     private Integer pin;
     private boolean lock;
-    private int maxAttempts = 3;
+    private final int maxAttempts = 3;
     private int attempts = 0;
     @Override
     public void setPin(int pin) {
@@ -27,7 +27,9 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void lock() {
-        if (pin == null) return;
+        if (pin == null) {
+            throw new IllegalStateException("Cannot lock: PIN not set.");
+        }
         this.lock = true;
     }
 
