@@ -21,7 +21,9 @@ public interface CircularQueue {
 
     int capacity();
 
-    void enqueue(int num);
+    void enqueue(int value);
+
+    Optional<Integer> dequeue();
 
     boolean isEmpty();
 }
