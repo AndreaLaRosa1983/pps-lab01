@@ -5,7 +5,6 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class MinMaxStackImpl implements MinMaxStack {
-    private record Node(int value, int min, int max) {}
 
     private final Deque<Integer> mainStack = new ArrayDeque<>();
     private final Deque<Integer> maxStack = new ArrayDeque<>();
@@ -15,12 +14,13 @@ public class MinMaxStackImpl implements MinMaxStack {
     public void push(int value) {
         mainStack.addFirst(value);
 
-        if(mainStack.isEmpty()){
+        if(minStack.isEmpty() && maxStack.isEmpty()){
+
             maxStack.addFirst(value);
             minStack.addFirst(value);
         } else {
             maxStack.addFirst(Math.max(value,maxStack.peek()));
-            minStack.addFirst(Math.min(value,mainStack.peek()));
+            minStack.addFirst(Math.min(value,minStack.peek()));
         }
     }
 
