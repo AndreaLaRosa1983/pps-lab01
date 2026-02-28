@@ -42,4 +42,10 @@ public class SmartDoorLockTest {
         lock.unlock(wrongPin);
         assertEquals(attempts,lock.getFailedAttempts());
     }
+
+    @Test
+    void getMaxAttempts(){
+        int attempts = 3;
+        assertEquals(attempts,lock.getMaxAttempts());
+    }
 }
