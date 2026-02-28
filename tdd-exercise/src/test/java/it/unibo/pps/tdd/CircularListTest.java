@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CircularQueueTest {
     @Test
     void testNewQueueIsEmpty() {
-        CircularQueue queue = newCircularQueueImpl(5);
+        CircularQueue queue = new CircularQueueImpl(5);
         assertTrue(queue.isEmpty());
     }
 }

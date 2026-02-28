@@ -16,5 +16,11 @@ import java.util.Optional;
  *   - Refactor
  */
 public interface CircularQueue {
-    
+
+    int size();
+
+    int capacity();
+
+
+    boolean isEmpty();
 }
