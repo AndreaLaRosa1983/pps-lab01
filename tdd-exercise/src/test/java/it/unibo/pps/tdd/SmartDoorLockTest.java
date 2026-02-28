@@ -1,13 +1,30 @@
 package it.unibo.pps.tdd;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SmartDoorLockTest {
+
+    private SmartDoorLock lock;
+    private int pin;
+    @BeforeEach
+    void beforeEach(){
+       lock = new SmartDoorLockImpl();
+       pin = 1234;
+    }
+
     @Test
-    public void isLock() {
-        SmartDoorLock lock = new SmartDoorLockImpl();
-        assertFalse(lock.isLocked());
+    public void isLocked() {
+        lock.setPin(pin);
+        lock.lock();
+        assertTrue(lock.isLocked());
+    }
+
+    @Test
+    void isBlocked() {
+         assertFalse(lock.isBlocked());
     }
 }
