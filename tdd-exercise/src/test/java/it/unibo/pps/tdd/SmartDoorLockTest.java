@@ -1,25 +1,25 @@
 package it.unibo.pps.tdd;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SmartDoorLockTest {
+
+
+class SmartDoorLockTest {
 
     private SmartDoorLock lock;
     private int pin;
+
     @BeforeEach
-    void beforeEach(){
-       lock = new SmartDoorLockImpl();
-       pin = 1234;
+    void setUp() {
+        lock = new SmartDoorLockImpl();
+        pin = 1234;
     }
 
-
-
     @Test
-    public void isLocked() {
+    void isLocked() {
         lock.setPin(pin);
         lock.lock();
         assertTrue(lock.isLocked());
@@ -27,15 +27,14 @@ public class SmartDoorLockTest {
 
     @Test
     void testLockWithoutPin() {
-        assertThrows(IllegalStateException.class, () -> {
-            lock.lock();
-        });
+        assertThrows(IllegalStateException.class, lock::lock);
     }
 
     @Test
     void testSetPinNotAllowedWhenLocked() {
         lock.setPin(pin);
         lock.lock();
+
         assertThrows(IllegalStateException.class, () -> lock.setPin(9999));
 
         lock.unlock(9999);
@@ -54,6 +53,7 @@ public class SmartDoorLockTest {
         lock.unlock(wrongPin);
         lock.unlock(wrongPin);
 
+        assertTrue(lock.isBlocked());
         assertThrows(IllegalStateException.class, () -> lock.setPin(9999));
     }
 
@@ -61,27 +61,32 @@ public class SmartDoorLockTest {
     void isBlocked() {
         int wrongPin = 2345;
         lock.setPin(pin);
+
         lock.unlock(wrongPin);
         lock.unlock(wrongPin);
         lock.unlock(wrongPin);
-         assertTrue(lock.isBlocked());
+
+        assertTrue(lock.isBlocked());
     }
 
     @Test
-    void testGetExpectedAttempts(){
-        int wrongPin = 2345 ;
+    void testGetExpectedAttempts() {
+        int wrongPin = 2345;
         int attempts = 2;
         lock.setPin(pin);
+
         lock.unlock(wrongPin);
         lock.unlock(wrongPin);
-        assertEquals(attempts,lock.getFailedAttempts());
+
+        assertEquals(attempts, lock.getFailedAttempts());
     }
 
     @Test
-    void testGetMaxAttempts(){
+    void testGetMaxAttempts() {
         int attempts = 3;
-        assertEquals(attempts,lock.getMaxAttempts());
+        assertEquals(attempts, lock.getMaxAttempts());
     }
+
     @Test
     void testReset() {
         int wrongPin = 2345;
@@ -99,5 +104,4 @@ public class SmartDoorLockTest {
         assertFalse(lock.isBlocked());
         assertEquals(0, lock.getFailedAttempts());
     }
-
 }
