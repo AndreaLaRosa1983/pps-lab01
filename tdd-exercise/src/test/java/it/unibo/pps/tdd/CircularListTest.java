@@ -1,6 +1,7 @@
 package it.unibo.pps.tdd;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -13,9 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class CircularListTest {
 
 
+    private CircularQueue  queue;
+    @BeforeEach
+    void setUp() {
+        queue = new CircularQueueImpl(5);
+    }
+
+
     @Test
     void testInitialState() {
-        CircularQueue queue = new CircularQueueImpl(5);
         assertEquals(0, queue.size());
         assertEquals(5, queue.capacity());
         assertTrue(queue.isEmpty());
@@ -23,14 +30,13 @@ class CircularListTest {
 
     @Test
     void testNewQueueIsEmpty() {
-        CircularQueue queue = new CircularQueueImpl(5);
         assertTrue(queue.isEmpty());
     }
 
     @Test
     void testEnqueueIncrementsSize() {
-        CircularQueue queue = new CircularQueueImpl(5);
-        queue.enqueue(10);
+        int value = 10;
+        queue.enqueue(value);
 
         assertEquals(1, queue.size());
         assertFalse(queue.isEmpty());
@@ -38,13 +44,21 @@ class CircularListTest {
 
     @Test
     void testPeekReturnsFirstElement() {
-        int value = 42;
-        CircularQueue queue = new CircularQueueImpl(5);
+        int value = 10;
         queue.enqueue(value);
-        // Verifichiamo che il valore inserito sia quello in "testa"
         assertEquals(Optional.of(value), queue.peek());
-        // Verifichiamo che peek non abbia rimosso l'elemento
         assertEquals(1, queue.size());
+    }
+
+    @Test
+    void testDequeueRemovesElement() {
+        int value = 10;
+        int value2 = 20;
+        queue.enqueue(value);
+        queue.enqueue(value2);
+        assertEquals(Optional.of(value), queue.dequeue());
+        assertEquals(1, queue.size());
+        assertEquals(Optional.of(value2), queue.peek());
     }
 
 }
