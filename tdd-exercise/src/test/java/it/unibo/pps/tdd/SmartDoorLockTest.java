@@ -26,9 +26,20 @@ public class SmartDoorLockTest {
     @Test
     void isBlocked() {
         int wrongPin = 2345;
+        lock.setPin(pin);
         lock.unlock(wrongPin);
         lock.unlock(wrongPin);
         lock.unlock(wrongPin);
          assertTrue(lock.isBlocked());
+    }
+
+    @Test
+    void getExpectedAttempts(){
+        int wrongPin = 2345 ;
+        int attempts = 2;
+        lock.setPin(pin);
+        lock.unlock(wrongPin);
+        lock.unlock(wrongPin);
+        assertEquals(attempts,lock.getFailedAttempts());
     }
 }

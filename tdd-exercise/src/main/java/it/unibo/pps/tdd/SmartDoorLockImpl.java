@@ -7,7 +7,6 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     private Integer pin;
     private boolean lock;
-    private boolean block;
     private int maxAttempts = 3;
     private int attempts = 0;
     @Override
@@ -18,6 +17,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void unlock(int pin) {
+        if (this.pin == null || isBlocked()) return;
         if (this.pin == pin) {
             lock = false;
         } else {
@@ -53,6 +53,5 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void reset() {
-
     }
 }
